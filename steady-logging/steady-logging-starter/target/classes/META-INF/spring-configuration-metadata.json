@@ -1,0 +1,80 @@
+{
+  "groups": [
+    {
+      "name": "steady.logging",
+      "type": "com.example.steady.logging.SteadyLoggingProperties",
+      "sourceType": "com.example.steady.logging.SteadyLoggingProperties"
+    },
+    {
+      "name": "steady.logging.ai",
+      "type": "com.example.steady.logging.SteadyLoggingProperties$Ai",
+      "sourceType": "com.example.steady.logging.SteadyLoggingProperties",
+      "sourceMethod": "getAi()"
+    },
+    {
+      "name": "steady.logging.hashing",
+      "type": "com.example.steady.logging.SteadyLoggingProperties$Hashing",
+      "sourceType": "com.example.steady.logging.SteadyLoggingProperties",
+      "sourceMethod": "getHashing()"
+    },
+    {
+      "name": "steady.logging.masking",
+      "type": "com.example.steady.logging.SteadyLoggingProperties$Masking",
+      "sourceType": "com.example.steady.logging.SteadyLoggingProperties",
+      "sourceMethod": "getMasking()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "steady.logging.ai.guard-mode",
+      "type": "java.lang.String",
+      "sourceType": "com.example.steady.logging.SteadyLoggingProperties$Ai",
+      "defaultValue": "deny-on-sensitive"
+    },
+    {
+      "name": "steady.logging.env",
+      "type": "java.lang.String",
+      "sourceType": "com.example.steady.logging.SteadyLoggingProperties",
+      "defaultValue": "local"
+    },
+    {
+      "name": "steady.logging.hashing.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.example.steady.logging.SteadyLoggingProperties$Hashing",
+      "defaultValue": true
+    },
+    {
+      "name": "steady.logging.hashing.salt",
+      "type": "java.lang.String",
+      "sourceType": "com.example.steady.logging.SteadyLoggingProperties$Hashing",
+      "defaultValue": "change-me-in-env"
+    },
+    {
+      "name": "steady.logging.masking.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.example.steady.logging.SteadyLoggingProperties$Masking",
+      "defaultValue": true
+    },
+    {
+      "name": "steady.logging.masking.mask-with",
+      "type": "java.lang.String",
+      "sourceType": "com.example.steady.logging.SteadyLoggingProperties$Masking",
+      "defaultValue": "****"
+    },
+    {
+      "name": "steady.logging.masking.patterns",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.example.steady.logging.SteadyLoggingProperties$Masking"
+    },
+    {
+      "name": "steady.logging.service",
+      "type": "java.lang.String",
+      "sourceType": "com.example.steady.logging.SteadyLoggingProperties",
+      "defaultValue": "unknown-service"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

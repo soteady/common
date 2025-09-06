@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Properties>
+    <Property name="kafka.bootstrap">localhost:9092</Property>
+    <Property name="kafka.topic">app.logs</Property>
+    <Property name="log.dir">D:/elasticsearch/app-logs</Property>
+  </Properties>
+
+  <Appenders>
+    <Console name="Console"><PatternLayout pattern="%msg%n"/></Console>
+
+    <!-- KafkaAppender có sẵn trong log4j-core 2.x (cần kafka-clients trên classpath) -->
+    <Kafka name="Kafka" topic="${kafka.topic}">
+      <PatternLayout pattern="%msg%n"/>
+      <Property name="bootstrap.servers">${kafka.bootstrap}</Property>
+      <Property name="acks">all</Property>
+      <Property name="compression.type">lz4</Property>
+      <Property name="enable.idempotence">true</Property>
+      <Property name="linger.ms">10</Property>
+      <Property name="batch.size">32768</Property>
+    </Kafka>
+
+    <RollingFile name="File"
+                 fileName="${log.dir}/steady-demo-be.log"
+                 filePattern="${log.dir}/steady-demo-be-%d{yyyy-MM-dd}-%i.log.gz">
+      <PatternLayout pattern="%msg%n"/>
+      <Policies>
+        <TimeBasedTriggeringPolicy interval="1"/>
+        <SizeBasedTriggeringPolicy size="50 MB"/>
+      </Policies>
+    </RollingFile>
+
+    <!-- ĐÚNG: dùng <Async> thay vì <AsyncAppender> -->
+    <Async name="ConsoleAsync"><AppenderRef ref="Console"/></Async>
+    <Async name="KafkaAsync"><AppenderRef ref="Kafka"/></Async>
+    <Async name="FileAsync"><AppenderRef ref="File"/></Async>
+  </Appenders>
+
+  <Loggers>
+    <!-- Tránh vòng lặp log của Kafka client -->
+    <Logger name="org.apache.kafka" level="WARN" additivity="false">
+      <AppenderRef ref="ConsoleAsync"/>
+    </Logger>
+
+    <Logger name="steady" level="INFO" additivity="false">
+      <AppenderRef ref="ConsoleAsync"/>
+      <AppenderRef ref="KafkaAsync"/>
+      <AppenderRef ref="FileAsync"/>
+    </Logger>
+
+    <Root level="INFO">
+      <AppenderRef ref="ConsoleAsync"/>
+    </Root>
+  </Loggers>
+</Configuration>

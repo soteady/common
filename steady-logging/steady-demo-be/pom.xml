@@ -1,0 +1,72 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <groupId>com.example.steady</groupId>
+    <artifactId>steady-logging-parent</artifactId>
+    <version>1.0.3</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>steady-demo-be</artifactId>
+  <name>steady-demo-be</name>
+  <description>Demo service using steady-logging-starter (Log4j2 + KafkaAppender)</description>
+
+  <properties>
+    <start-class>com.example.steady.demo.SteadyDemoApplication</start-class>
+  </properties>
+
+  <dependencies>
+    <!-- Web + dùng Log4j2 (loại Logback mặc định) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-logging</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <!-- Log4j2 (kéo log4j-core, log4j-api, log4j-slf4j2-impl) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-log4j2</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+    </dependency>
+
+    <!-- Starter tự viết -->
+    <dependency>
+      <groupId>com.example.steady</groupId>
+      <artifactId>steady-logging-starter</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <!-- Kafka clients để kích hoạt KafkaAppender trong log4j-core -->
+    <dependency>
+      <groupId>org.apache.kafka</groupId>
+      <artifactId>kafka-clients</artifactId>
+      <version>3.6.2</version>
+    </dependency>
+
+    <!-- Test -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>
