@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+logging:
+  config: classpath:log4j2-spring.xml
+steady:
+  logging:
+    service: steady-demo-be
+    env: local
+    masking:
+      enabled: true
+      mask-with: "****"
+      patterns:
+        - '(?i)([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,})'
+        - '(?i)\b(0|\+?84)\d{8,11}\b'
+        - '\b\d{16}\b'
+        - '\b\d{10,14}\b'
+        - '(?i)bearer\s+[a-z0-9\-.~_]+'
+        - '(?i)api[_-]?key\s*[:=]\s*[a-z0-9\-]{10,}'
+        - '(?s)BEGIN\s+RSA\s+PRIVATE\s+KEY.*END\s+RSA\s+PRIVATE\s+KEY'
+
+    hashing:
+      enabled: true
+      salt: "${STEADY_HASH_SALT:demo-salt}"
+    ai:
+      guard-mode: deny-on-sensitive
+

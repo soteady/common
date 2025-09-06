@@ -1,0 +1,14 @@
+service: steady-demo-be
+codes:
+  - code: E-ORD-001
+    http: 404
+    category: BUSINESS
+    message: "Order not found"
+  - code: E-AUTH-001
+    http: 401
+    category: AUTH
+    message: "Unauthorized"
+  - code: E-SYS-001
+    http: 500
+    category: SYSTEM
+    message: "Unexpected error"
