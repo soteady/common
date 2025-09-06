@@ -37,7 +37,7 @@ jobs:
         env:
           # Truyền các secret và token vào script dưới dạng biến môi trường
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GEMINI_API_KEY: AIzaSyBNf8594Q6SbrhL8tJN5DCQtI9BJZisdH4
+          GEMINI_API_KEY: AIzaSyAPT9J5skc2CTBfu2IhPiShsKhWdA4tIj8
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_REF: ${{ github.ref }}
         run: python review_script.py
